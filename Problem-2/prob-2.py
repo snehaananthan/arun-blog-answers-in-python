@@ -94,30 +94,3 @@ write. \
 format("com.databricks.spark.avro"). \
 option("codec", "org.apache.hadoop.io.compress.SnappyCodec"). \
 save("/user/snehaananthan/problem2/solution/avro/result-sql")
-
-###########################################################################################
-##Scratch-pad: orc-compression
-###########################################################################################
-
-sqlContext.setConf("orc.compress", "org.apache.hadoop.io.compress.SnappyCodec")
-
-'''
-results_DF. \
-coalesce(4). \
-write. \
-format("orc"). \
-option("codec", "org.apache.hadoop.io.compress.SnappyCodec"). \
-save("/user/snehaananthan/problem2/solution/orc/result")
-'''
-
-sqlContext.setConf("spark.io.compression.codec", "snappy")
-
-results_DF.write. \
-option("orc.compress", "zlib"). \
-orc("/user/snehaananthan/problem2/solution/orc/result")
-
-results_DF. \
-coalesce(4). \
-write. \
-format("orc"). \
-save("/user/snehaananthan/problem2/solution/orc/result-uncompressed")
